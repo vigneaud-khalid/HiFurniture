@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <div class="w3-content" style="max-width:2000px;margin-top:36px">
+
+        <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:400px" id="login">
+
+        <h1 class="h3 mb-5 font-weight-normal" style ="margin-top:20px; margin-bottom:25px" >Please sign in</h1>
+
+            <label for="inputUsername">Username</label>
+        <div class="w3-input w3-border w3-round w3-light-grey" style ="margin-top:5px; margin-bottom:15px" >        
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+        </div>
+        <label for="inputPassword">Password</label>
+        <div class="w3-input w3-border w3-round w3-light-grey" style ="margin-top:5px; margin-bottom:25px" >        
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+         
+<button class="w3-button w3-black w3-margin-bottom" style="margin-top:10px" type="submit"> Sign in </button>
+
+    </div>
+ </div>
+</form>
+{% endblock %}

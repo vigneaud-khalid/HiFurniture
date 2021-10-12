@@ -1,19 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+	<head>
+		<title>	{% block title %}Furniture e-commerce 	{% endblock %}	</title>
+        <meta name="description"
+    content="furniture sales website  bed table chair">
+ 
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{# Run `composer require symfony/webpack-encore-bundle`
+						           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+            {# <link rel="stylesheet" href="assets\css\w3.css"> #}
+			<link rel="stylesheet" href="{{ asset('assets/css/w3.css') }}">
+			{# <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> #}
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<style>
+				body {
+					font-family: "Lato", sans-serif
+				}
+				.mySlides {
+					display: none
+				}
+			</style>
+		{% endblock %}
+
+		{% block javascripts %}
+            <script>
+                // Used to toggle the menu on small screens when clicking on the menu button
+                function myFunction() {
+                    var x = document.getElementById("navDemo");
+                    if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                    } else {
+                    x.className = x.className.replace(" w3-show", "");
+                    }
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                var modal = document.getElementById('ticketModal');
+                    window.onclick = function (event) {
+                    if (event.target == modal) { modal.style.display = "none";}
+                }
+            </script>
+		{% endblock %}
+	</head>
+
+	<body>
+    {% include 'layout/header.html.twig' %}
+    {# <div class="w3-content" style="max-width:2000px;margin-top:46px"> #}
+
+    {% block body %}	
+    {% endblock %}
+    {% include 'layout/misc.html.twig' %}
+
+    {# </div> #}
+    {% include 'layout/footer.html.twig' %}
+			
+
 </html>

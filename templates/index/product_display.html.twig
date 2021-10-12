@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Product details - {{ parent() }} {% endblock %}
+
+{% block body %}
+<div class="w3-content" style="max-width:2000px;margin-top:26px">
+
+  <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-24" style="max-width:800px" id="band">
+  {% if product is defined %}
+      <h3 class="w3-opacity"><i>Trend furniture for <b>{{ date|date('F Y ', 'Europe/Paris') }}</b></i></h3>
+
+    <h2 class="w3-wide">Your chosen product among <strong>{{product.getCategoryName()}} </strong></h2>
+  {% endif %}
+  </div>
+</div>
+
+
+
+<div class="w3-card-4">
+  <header class="w3-container w3-center w3-light-grey">
+    <h3>Product details : <strong> {{product.name}} </strong></h3>
+  </header>
+
+
+
+<div class="w3-container w3-content w3-center w3-padding-24" style="max-width:800px" id="produitmobilier"">
+    <div class="w3-container w3-content w3-padding-24" style="max-width:800px">
+            
+      <div class="w3-row-padding w3-padding-32" style="margin:6px">
+        <div class="w3-third w3-margin-bottom" style="width:65%">
+                    <img src="{{ asset('assets/img/' ~ product.name ~  '.jpg') }}" class="w3-round w3-hover-opacity" style="width: 300px;" alt="picture of your chosen product : {{product.name}}">
+          <div class="w3-container w3-white">
+            <p><b> {{ product.name() }}</b></p>
+            <p><b>Tags:</b>
+             {# Boucle affichant chacun de nos tags #}
+
+
+
+             
+              {% for tag in product.tags %}
+                <a href="{{ path('index_tag', {'tagName' : tag.name}) }}">
+                {{ tag.name }}</a>; 
+              {% endfor %}</p>
+          </div>
+        </div>
+        <div class="w3-third w3-margin-bottom" style="width:33%">
+          <div class="w3-container w3-white">
+            <p><b>your {{ product.getCategoryName() }}</b></p>
+            <p class="w3-opacity">Stock : {{ product.stock }}  units available</p>
+            <p class="w3-opacity">Price : {{ product.price }} $</p>
+            <p>{{ product.description }}</p>
+                {% if product.stock > 0  and is_granted('ROLE_USER')  %}
+                  {{ form(buyForm) }}
+                  {# <a href="{{path('buy_product',{'productId': product.id} )}}" class="w3-button w3-black w3-section" role="button">+ BUY</a> #}
+                {% endif %}
+                <a href="{{ path('index')}}" class="w3-button w3-grey w3-section" role="button">BACK HOME</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<hr><hr>
+
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Backoffice Administrator - {{ parent() }} {% endblock %}
+
+{% block body %}
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="dataform">
+  <h1>Backoffice Administrator</h1>
+          <a href="{{path('create_product') }}" class="w3-button w3-black"  style="" role="button">Create Product<a/>
+            {# <a href="{{path('regenerate_category') }}" class="w3-button w3-black"  style="" role="button">Regenerate Categories<a/> #}
+          <a href="#" class="w3-button w3-black"  style="" role="button">Regenerate Categories<a/>
+          <a href="{{ path('create_tag') }}" class="w3-button w3-black"  style="" role="button">Create Tag<a/>
+
+
+  <h2 class="w3-wide">Product List</h2>
+
+ {% if products is not empty %}
+<ul class="w3-ul w3-border-white w3-white">
+        {% for product in products %}
+        <li class="w3-padding">
+            <p>
+                <b>{{ product.name }}</b> : ({{ product.getCategoryName()|capitalize }})
+                <a href="{{ path('delete_product', {'productId' : product.id}) }}" class="w3-button w3-red" style="float:right;" role="button">Delete</a>
+                <a href="{{ path('update_product', {'productId' : product.id}) }}" class="w3-button w3-blue-gray" style="float:right;" role="button">Edit</a>
+            
+                <img src="{{ asset('assets/img/placeholder_' ~ product.getCategoryName() ~ '.jpg') }}" class="w3-round w3-margin-bottom w3-margin-left" alt="Random Name" style="width:10%">
+            </p>
+        </li>
+        {% endfor %}
+    </ul>  
+
+{% else %}
+      <p><b>No tag display</b></p>
+    {% endif %}
+
+    <h2>Tag List</h2>
+
+    {% if tags is not empty %}
+    <ul class="w3-ul w3-border-white w3-white">
+      {% for tag in tags %}
+          <li class="w3-padding">
+            <p>
+              <b>{{ tag.name }}</b>
+              <a href="{{ path('delete_tag', {'tagId' : tag.id}) }}" class="w3-button w3-red" style="float:right;" role="button">Delete</a>
+              <a href="{{ path('update_tag', {'tagId' : tag.id}) }}" class="w3-button w3-blue-gray" style="float:right;" role="button">Edit</a>
+            </p>
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p><b>No tag display</b></p>
+    {% endif %}
+
+ </div>
+{% endblock %}

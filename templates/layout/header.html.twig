@@ -1,0 +1,64 @@
+<header>
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-black w3-card">
+			<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu">
+				<i class="fa fa-bars"></i>
+			</a>
+			<a href="{{ path('index')}}" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+			<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right">
+				<i class="fa fa-search"></i>
+			</a>
+			{% if categories is defined %}
+				<div class="w3-dropdown-hover w3-hide-small">
+					<button class="w3-padding-large w3-button" title="More">CATEGORIES
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						{% for category in categories %}
+							<a href="{{ path('index_category', {'categoryName' : category.name}) }}" class="w3-bar-item w3-button">{{ category.name|capitalize }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			<a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+			{% if is_granted('ROLE_USER') %}
+				{% if  not is_granted('ROLE_ADMIN') %}
+					<a href="{{ path('client_backoffice') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">YOUR ORDERS</a>
+				{% endif %}
+				<div class="w3-dropdown-hover w3-hide-small"> 
+					<button class="w3-padding-large w3-button" title="More">MORE
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a href="{{ path('index')}}" class="w3-bar-item w3-button w3-padding-large">HOME</a> 
+					</div>
+				</div>
+				{% if is_granted('ROLE_ADMIN') %}
+				<div class="w3-dropdown-hover w3-hide-small"> 
+					<button class="w3-padding-large w3-button" title="More">ADMINISTRATOR
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4"> 
+						<a href="{{ path('backoffice_display') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">BACKOFFICE</a>
+						<a href="{{ path('admin_register') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">NEW ADMIN REGISTER</a>
+					</div>
+				</div>
+				{% endif %}
+				<a href="{{ path('app_logout') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" >LOG OUT</a>
+			{% else %}
+				<a href="{{ path('app_login') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small  w3-right">LOG IN</a>
+				<a href="{{ path('register_client') }}" class="w3-bar-item w3-button w3-padding-large w3-hide-small  w3-right">REGISTER</a>
+			{% endif %}
+		</div>
+	</div>
+
+	<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+	<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+		<a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BAND</a>
+		<a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TOUR</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+		<a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+	</div>
+
+</header>
