@@ -115,8 +115,6 @@ class ProductFixtures extends Fixture
             $value->setName($key); //Le nom est celui de la clef de l'index
             // $value->setDescription($lorem); //La description est un lorem générique
             $value->setDescription('Our '.$key.'s are among the best '.$key.'s ever designed...');
-
-
             $manager->persist($value); //Demande de persistance
         }
         //Nous lisons le tableau productArray grâce à une boucle foreach et nous persistons chaque nouveau product renseigné par les informations du tableau associatif parcouru
@@ -128,7 +126,6 @@ class ProductFixtures extends Fixture
             $product->setCategory($categoryArray[$productData['category']]); //Nous récupérons l'objet de categoryArray tenu par la clef dont le nom est fourni par la valeur 'category' de $productData
             $product->setDescription($productData['description']);
             //$product->setDescription($descript1.$product->getCategory()->getName().$descript2);
-            
             $manager->persist($product);
         }
         $manager->flush();
